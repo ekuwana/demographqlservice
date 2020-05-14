@@ -1,0 +1,12 @@
+target/*
+.settings/
+.project
+.classpath
+.idea/*
+*.iml
+tomcat.*.8080/**
+hsperfdata_root/*
+home/logs/*
+doc/*
+logs/*
+/target/

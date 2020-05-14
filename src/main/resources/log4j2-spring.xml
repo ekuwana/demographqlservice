@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration monitorInterval="5" status="DEBUG">
+	<Properties>
+		<Property name="log.dir">home/logs</Property>
+		<Property name="logFileName">demographqlservice.log</Property>
+		<Property name="mainLogRollingFilePattern">demographqlservice.%i.log</Property>
+		<Property name="patternLayout">%d %-5level %c{1} - [%t] %msg%n</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${sd:patternLayout}" />
+		</Console>
+		<RollingRandomAccessFile name="MainLogFile"
+			fileName="${sys:log.dir}/${sd:logFileName}" immediateFlush="true"
+			append="true"
+			filePattern="${sys:log.dir}/${sd:mainLogRollingFilePattern}">
+			<PatternLayout pattern="${sd:patternLayout}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="10"
+				fileIndex="min" />
+		</RollingRandomAccessFile>
+	</Appenders>
+	<Loggers>
+
+        <Logger name="com.example" additivity="false" level="debug">
+            <AppenderRef ref="MainLogFile" />
+            <AppenderRef ref="console"/>
+        </Logger>
+        
+		<Root level="error" additivity="false">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="MainLogFile" />
+		</Root>
+	</Loggers>
+</Configuration>

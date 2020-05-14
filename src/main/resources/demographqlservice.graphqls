@@ -1,0 +1,34 @@
+schema {
+  query: Query
+}
+
+enum ValueType {
+  STRING,
+  FLOAT,
+  INT32,
+  INT64
+}
+
+interface BaseObject {
+  id: ID
+  name: String
+}
+
+type TestEntity implements BaseObject {
+  id: ID
+  name: String
+
+  description: String
+  properties: [PropertyObject!]
+}
+
+type PropertyObject {
+  valueType: ValueType
+  value: String
+}
+
+type Query {
+  getAllEntities: [TestEntity!]!
+  getEntitiesByName(name: String!): [TestEntity!]!
+  getEntityById(id: String!): TestEntity
+}
